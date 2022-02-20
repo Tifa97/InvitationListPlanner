@@ -4,19 +4,19 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.invitationlistplanner.database.dao.GroupDao
-import com.example.invitationlistplanner.database.dao.PersonDao
-import com.example.invitationlistplanner.database.entity.Group
-import com.example.invitationlistplanner.database.entity.Person
+import com.example.invitationlistplanner.database.dao.GuestDao
+import com.example.invitationlistplanner.database.dao.GuestGroupDao
+import com.example.invitationlistplanner.database.entity.Guest
+import com.example.invitationlistplanner.database.entity.GuestGroup
 
 @Database(
-    entities = [Group::class, Person::class],
-    version = 1,
+    entities = [GuestGroup::class, Guest::class],
+    version = 3,
     exportSchema = false
 )
 abstract class InvitationListRoom : RoomDatabase() {
-    abstract val groupDao: GroupDao
-    abstract val personDao: PersonDao
+    abstract val guestGroupDao: GuestGroupDao
+    abstract val guestDao: GuestDao
 
     companion object {
 

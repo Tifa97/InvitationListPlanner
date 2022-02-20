@@ -37,7 +37,12 @@ class MainActivity : ComponentActivity() {
                         GuestGroupScreen()
                     }
                     composable(Routes.ALL_PERSONS_SCREEN) {
-                        AllGuestsScreen()
+                        AllGuestsScreen(
+                            onNavigate = {
+                                navController.navigate(it.route)
+                            },
+                            context
+                        )
                     }
 //                    composable(
 //                        route = Routes.ADD_EDIT_TODO + "?todoId={todoId}",

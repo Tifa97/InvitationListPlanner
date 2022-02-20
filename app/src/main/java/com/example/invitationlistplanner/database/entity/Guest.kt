@@ -7,26 +7,26 @@ import androidx.room.ForeignKey.CASCADE
 import androidx.room.PrimaryKey
 
 @Entity(
-    tableName = "person_table",
+    tableName = "guest_table",
     foreignKeys = [
         ForeignKey(
-            entity = Group::class,
+            entity = GuestGroup::class,
             parentColumns = ["id"],
-            childColumns = ["person_group_id"],
+            childColumns = ["guest_group_id"],
             onDelete = CASCADE
         )
     ]
 )
-data class Person(
+data class Guest(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
 
-    @ColumnInfo(name = "person_name")
-    val name: String?,
+    @ColumnInfo(name = "guest_name")
+    val name: String,
 
-    @ColumnInfo(name = "person_is_adult")
+    @ColumnInfo(name = "guest_is_adult")
     val isAdult: Boolean?,
 
-    @ColumnInfo(name = "person_group_id")
+    @ColumnInfo(name = "guest_group_id")
     val groupId: Int?
 )

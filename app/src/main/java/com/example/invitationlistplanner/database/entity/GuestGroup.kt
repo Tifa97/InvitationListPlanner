@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "group_table")
-data class Group(
+data class GuestGroup(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
 
