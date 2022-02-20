@@ -3,13 +3,14 @@ package com.example.invitationlistplanner
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.platform.LocalContext
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.invitationlistplanner.navigation.Routes
+import com.example.invitationlistplanner.ui.allguestsscreen.AllGuestsScreen
+import com.example.invitationlistplanner.ui.guestgroupscreen.GuestGroupScreen
+import com.example.invitationlistplanner.ui.mainscreen.MainScreen
 import com.example.invitationlistplanner.ui.theme.InvitationListPlannerTheme
 
 class MainActivity : ComponentActivity() {
@@ -17,27 +18,42 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             InvitationListPlannerTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
+                val navController = rememberNavController()
+                val context = LocalContext.current
+
+                NavHost(
+                    navController = navController,
+                    startDestination = Routes.MAIN_SCREEN
                 ) {
-                    Greeting("Android")
+                    composable(Routes.MAIN_SCREEN) {
+                        MainScreen(
+                            onNavigate = {
+                                navController.navigate(it.route)
+                            },
+                            context
+                        )
+                    }
+                    composable(Routes.GROUP_LIST_SCREEN) {
+                        GuestGroupScreen()
+                    }
+                    composable(Routes.ALL_PERSONS_SCREEN) {
+                        AllGuestsScreen()
+                    }
+//                    composable(
+//                        route = Routes.ADD_EDIT_TODO + "?todoId={todoId}",
+//                        arguments = listOf(
+//                            navArgument(name = "todoId") {
+//                                type = NavType.IntType
+//                                defaultValue = -1
+//                            }
+//                        )
+//                    ) {
+//                        AddEditTodoScreen(onPopBackStack = {
+//                            navController.popBackStack()
+//                        })
+//                    }
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    InvitationListPlannerTheme {
-        Greeting("Android")
     }
 }
